@@ -57,21 +57,22 @@ var drawChart = function(){
         .innerRadius(innerR)
         .outerRadius(r)
         
-    var arcGeneratorText = d3.arc()
-        .innerRadius(r)
-        .outerRadius(r*1.5)
+    var arcGeneratorTransition = d3.arc()
+        .innerRadius(innerR * 0.6)
+        .outerRadius(r * 0.6)
 
     // Create a path for each slice using the arc function
     pieGroup.selectAll("slices")
         .data(pathData)
         .join('path')
-        .attr('d', arcGenerator)
         .attr('fill', fill)
         .attr("stroke", bgColor)
         .style("stroke-width", sliceMargin)
         .style("opacity", 0.2) 
+        .attr('d', arcGeneratorTransition)
         .transition()
         .delay((d, i) => i * delay)
+        .attr('d', arcGenerator)
         .style("opacity", 1) 
 
     // Append value as text to center of each slice
@@ -79,18 +80,19 @@ var drawChart = function(){
         .data(pathData)
         .join('text')
         .text(function(d) {return d.value; })
-        .attr("transform", function(d) { return `translate(${arcGenerator.centroid(d)})`})
         .style("text-anchor", "middle")
-        .style("font-size", fontSize)
         .attr('fill', bgColor)
         .attr('font-family', fontFamily)
-        .attr('opacity', 0)
-        // Add transition that fades in the numbers
+        .attr('opacity', 0.2)
+        .attr("font-size", fontSize*0.5)
+        .attr('d', arcGeneratorTransition)
+        .attr("transform", function(d) { return `translate(${arcGeneratorTransition.centroid(d)})`})
         .transition()
         .delay((d, i) => i * delay)
-        .attr('font-size', fontSize)
         .attr('opacity', 1)
-
+        .attr("font-size", fontSize)
+        .attr('d', arcGenerator)
+        .attr("transform", function(d) { return `translate(${arcGenerator.centroid(d)})`})
 }
 
 // Call function to draw the chart once window load is complete
