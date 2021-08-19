@@ -124,21 +124,21 @@ var drawChart = function(){
         svg.append("g").call(cat2Labels);
 
     // Append lables for each row    
-    rowLables = g =>
-        g
-            .attr("transform", `translate( ${width/2} ,${height/2} )`)
-            .attr("text-anchor", "middle")
-            .attr("fill", fill)
-            .attr('font-family', fontFamily)
-            .attr("font-size", fontSize)
-            .selectAll("text")
-            .data(metrics)
-                .join("text")
-                .attr("x", -labelMargin*2)
-                .attr("y", (d, i) => y(i)-outerRadius -labelMargin*2.2)
-                .attr("dy", "0.31em")
-                .text(d => d)
-    svg.append("g").call(rowLables);
+    // rowLables = g =>
+    //     g
+    //         .attr("transform", `translate( ${width/2} ,${height/2} )`)
+    //         .attr("text-anchor", "middle")
+    //         .attr("fill", fill)
+    //         .attr('font-family', fontFamily)
+    //         .attr("font-size", fontSize)
+    //         .selectAll("text")
+    //         .data(metrics)
+    //             .join("text")
+    //             .attr("x", -labelMargin*2)
+    //             .attr("y", (d, i) => y(i)-outerRadius -labelMargin*2.2)
+    //             .attr("dy", "0.31em")
+    //             .text(d => d)
+    // svg.append("g").call(rowLables);
     
 }
 
