@@ -76,6 +76,7 @@ var drawChart = function(){
         .attr("fill", "none")
         .attr("stroke", fill)
         .attr("stroke-width", strokeWidth)
+        .attr("stroke-linecap", 'round')
         .attr('class', 'simple-line')
         .transition()
             .duration(delay*data.length)
